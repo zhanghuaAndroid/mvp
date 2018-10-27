@@ -1,28 +1,14 @@
 package com.eoffcn.mvpapplication.presenter;
 
-import com.eoffcn.mvpapplication.model.CallBack;
 import com.eoffcn.mvpapplication.model.TestModel;
-import com.eoffcn.mvpapplication.model.entity.ResultBean;
-import com.eoffcn.mvpapplication.presenter.base.BasePresenter;
-import com.eoffcn.mvpapplication.view.ITestView;
+import com.eoffcn.mvpapplication.view.TestView;
+import com.example.lib_zh_mvp.mvp.CallBack;
+import com.example.lib_zh_mvp.mvp.presenter.BasePresenter;
 
-import java.util.List;
-
-/**
- * @author zhanghua
- * @package com.eoffcn.mvpapplication.presenter
- * @fileName TestPresenter
- * @date 2018/10/24 10:43
- * @org www.offcn.com
- * @email
- * @description
- */
-public class TestPresenter extends BasePresenter<ITestView> {
-
+public class TestPresenter extends BasePresenter<TestView> {
     private TestModel testModel;
-
-    public TestPresenter(ITestView iTestView) {
-        super(iTestView);
+    public TestPresenter() {
+        super();
         testModel = new TestModel();
     }
 
@@ -31,19 +17,17 @@ public class TestPresenter extends BasePresenter<ITestView> {
         if (isViewAttached()){
             return;
         }
-        CallBack<List<ResultBean>> callBack = new CallBack<List<ResultBean>>() {
-
+        CallBack<String> callBack = new CallBack<String>() {
             @Override
-            public void onSuccess(int responseCode, List<ResultBean> resultBeans) {
-                getView().showDataAndUpdateUI(resultBeans);
+            public void onSuccess(int responseCode, String s) {
+                getView().onSuccessUI();
             }
 
             @Override
             public void onError(int errorCode, String msg) {
-                getView().showError(errorCode,msg);
+                getView().onErrorUI();
             }
-
         };
-        testModel.getData(callBack);
+        testModel.getTestData(callBack);
     }
 }

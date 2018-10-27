@@ -1,70 +1,54 @@
 package com.eoffcn.mvpapplication.activity;
 
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
-import android.view.View;
-
 import com.eoffcn.mvpapplication.R;
-import com.eoffcn.mvpapplication.activity.base.BaseActivity;
-import com.eoffcn.mvpapplication.adapter.SongPoetryAdapter;
-import com.eoffcn.mvpapplication.model.entity.ResultBean;
 import com.eoffcn.mvpapplication.presenter.TestPresenter;
-import com.eoffcn.mvpapplication.view.ITestView;
+import com.eoffcn.mvpapplication.view.TestView;
+import com.example.lib_zh_mvp.mvp.activity.BaseMVPActivity;
 
-import java.util.ArrayList;
-import java.util.List;
+public class TestActivity extends BaseMVPActivity implements TestView {
 
-/**
- * @author zhanghua
- * @package com.eoffcn.mvpapplication.activity
- * @fileName TestActivity
- * @date 2018/10/24 11:09
- * @org www.offcn.com
- * @email
- * @description
- */
-public class TestActivity extends BaseActivity implements ITestView {
     private TestPresenter mPresenter;
-    private RecyclerView rvList;
-    private List<ResultBean> mResultBeans;
-    private SongPoetryAdapter songPoetryAdapter;
+
     @Override
-    public int getLayout() {
+    protected int getLayout() {
         return R.layout.activity_test;
     }
 
     @Override
-    public void initData() {
-        mPresenter = new TestPresenter(this);
-        mResultBeans = new ArrayList<>();
+    protected void initPresenter() {
+        mPresenter = new TestPresenter();
+    }
+
+    @Override
+    protected void initData() {
         mPresenter.getData();
     }
 
     @Override
-    public void initView() {
+    protected void initView() {
+
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
         mPresenter.attachView(this);
-        rvList = findViewById(R.id.rv_list);
+    }
+
+
+    @Override
+    protected void initListener() {
+
     }
 
     @Override
-    public void initListener() {
-        rvList.setLayoutManager(new LinearLayoutManager(mActivity));
-        songPoetryAdapter = new SongPoetryAdapter(R.layout.layout_list_item, mResultBeans);
-        rvList.setAdapter(songPoetryAdapter);
+    public void onSuccessUI() {
+
     }
 
     @Override
-    public void showDataAndUpdateUI(List<ResultBean> resultBeans) {
-        if (mResultBeans.size() != 0){
-            mResultBeans.clear();
-        }
-        mResultBeans.addAll(resultBeans);
-        songPoetryAdapter.notifyDataSetChanged();
-    }
+    public void onErrorUI() {
 
-    @Override
-    public void showError(int errorCode, String msg) {
-        super.showError(errorCode, msg);
     }
 
     @Override

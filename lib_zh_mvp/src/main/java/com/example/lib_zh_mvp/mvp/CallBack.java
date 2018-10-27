@@ -1,4 +1,4 @@
-package com.eoffcn.mvpapplication.model;
+package com.example.lib_zh_mvp.mvp;
 
 /**
  * @author zhanghua
@@ -10,6 +10,6 @@ package com.eoffcn.mvpapplication.model;
  * @description
  */
 public interface CallBack<T> {
-    void onSuccess(int responseCode,T t);
-    void onError(int errorCode,String msg);
+    void onSuccess(int responseCode, T t);
+    void onError(int errorCode, String msg);
 }

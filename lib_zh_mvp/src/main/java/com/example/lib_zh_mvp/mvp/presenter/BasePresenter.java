@@ -1,23 +1,11 @@
-package com.eoffcn.mvpapplication.presenter.base;
+package com.example.lib_zh_mvp.mvp.presenter;
 
-import com.eoffcn.mvpapplication.activity.base.BaseActivity;
-import com.eoffcn.mvpapplication.view.base.IBaseView;
+import com.example.lib_zh_mvp.mvp.view.IBaseView;
 
-import java.lang.ref.WeakReference;
-
-/**
- * @author zhanghua
- * @package com.eoffcn.mvpapplication.presenter
- * @fileName BasePresenter
- * @date 2018/10/23 16:16
- * @org www.offcn.com
- * @email
- * @description
- */
 public abstract class BasePresenter<V extends IBaseView> {
     private V mIView;
 
-    public BasePresenter(V v) {
+    public BasePresenter() {
 
     }
 
@@ -39,14 +27,14 @@ public abstract class BasePresenter<V extends IBaseView> {
      * 是否与View建立连接
      * 每次调用业务请求的时候都要出先调用方法检查是否与View建立连接
      */
-    public boolean isViewAttached() {
+    protected boolean isViewAttached() {
         return mIView != null;
     }
 
     /**
      * 获取连接的view
      */
-    public V getView() {
+    protected V getView() {
         return mIView;
     }
 
